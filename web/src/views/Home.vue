@@ -2,7 +2,7 @@
   <div class="home">
     <img style="width:50%; max-width:100px;" alt="SEU Seic logo" src="../assets/logo.png">
     <h2 class="h2-title">东南大学网络与信息中心</h2>
-    <h3 v-if="hasMeeting" class="h3-title">正在进行：{{meetingName}}</h3>
+    <h3 class="h3-title">快捷签到</h3>
     <div class="info">
       <div style="font-weight:bold;text-align:center; padding:12px;">请核对您的信息</div>
       <div class="row">
