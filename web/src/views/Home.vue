@@ -52,7 +52,9 @@ export default {
     let ticket = ''
     try {
       ticket = window.location.search.split('=')[1]
-    } catch(e) {console.log(e)}
+    } catch(e) {
+      /* eslint-disable-line  */
+    }
     if (ticket) {
       let userInfo = await axios.post('/checkin-api/login', { ticket })
       if(userInfo.data.success){
