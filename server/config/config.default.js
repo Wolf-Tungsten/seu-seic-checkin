@@ -17,6 +17,14 @@ module.exports = appInfo => {
       },
     },
   };
+  config.cluster = {
+    listen: {
+      path: '',
+      port: 7100,
+      hostname: '0.0.0.0',
+    },
+  };
+
   // use for cookie sign key, should change to your own and keep security
   config.keys = appInfo.name + '_1573537745573_8779';
 
