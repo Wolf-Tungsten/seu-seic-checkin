@@ -4,8 +4,8 @@
     <el-button @click="exportXLSX">导出</el-button>
     <el-button type="danger" @click="deleteData">清除数据</el-button>
     <el-table :data="list" style="margin-top:30px;">
-      <el-table-column prop="name" label="姓名" width="180"></el-table-column>
-      <el-table-column prop="cardnum" label="一卡通号" width="180"></el-table-column>
+      <el-table-column prop="name" label="姓名" width="40"></el-table-column>
+      <el-table-column prop="cardnum" label="一卡通号" width="60"></el-table-column>
       <el-table-column prop="timedisp" label="签到时间"></el-table-column>
     </el-table>
   </div>
