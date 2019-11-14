@@ -14,7 +14,7 @@
         <div>{{cardnum}}</div>
       </div>
     </div>
-    <el-button type='success' style="margin-top:40px; width:300px;" @click='checkIn'>点击签到</el-button>
+    <el-button type='success' style="margin-top:40px; width:300px;" @click='checkIn'>{{isAdmin ? '结果导出':'点击签到'}}</el-button>
   </div>
 </template>
 
@@ -32,7 +32,8 @@ export default {
       meetingStatus:'签到未开始',
       meetingName:'测试名称',
       name:'加载中',
-      cardnum:'请稍候'
+      cardnum:'请稍候',
+      isAdmin:false
     }
   },
   components: {
@@ -40,6 +41,10 @@ export default {
   },
   methods:{
     async checkIn(){
+      if(this.isAdmin){
+        this.$router.replace('/admin')
+        return
+      }
       let res = await axios.post('/checkin-api/checkIn', {}, {headers:{token:this.$store.state.token}});
       if(res.data.success){
         this.$router.replace('/success')
@@ -65,9 +70,10 @@ export default {
         window.location = 'https://newids.seu.edu.cn/authserver/login?goto=https://seicwxbz.seu.edu.cn/checkin'
       }
       if(userInfo.data.isAdmin){
-        this.$router.replace('/admin')
+        this.isAdmin = true
       }
     } else {
+
       window.location = 'https://newids.seu.edu.cn/authserver/login?goto=https://seicwxbz.seu.edu.cn/checkin'
     }
   }
