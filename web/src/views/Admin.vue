@@ -6,7 +6,7 @@
     <el-table :data="list" style="margin-top:30px;margin=left:20px;margin-right:20px;">
       <el-table-column prop="name" label="姓名" width="80"></el-table-column>
       <el-table-column prop="cardnum" label="一卡通号" width="100"></el-table-column>
-      <el-table-column prop="timedisp" label="签到时间" ></el-table-column>
+      <el-table-column prop="timedisp" label="签到时间"></el-table-column>
     </el-table>
   </div>
 </template>
@@ -41,27 +41,37 @@ export default {
       });
     },
     async exportXLSX() {
-      let that = this
+      let that = this;
       let option = {
         datas: [
           //可多张sheet
           {
             sheetData: that.list, //数据
-            sheetName: '签到记录', //左下角tab页的sheet名
+            sheetName: "签到记录", //左下角tab页的sheet名
             sheetFilter: ["name", "cardnum", "timedisp"], // json的key，需要和header的每一项顺序对应
             sheetHeader: ["姓名", "一卡通号", "签到时间"] //.xlsx的表头
-            
           }
         ]
       };
-      let toExcel = new ExportJsonExcel(option)
-      toExcel.saveExcel()
+      let toExcel = new ExportJsonExcel(option);
+      toExcel.saveExcel();
     },
-    async deleteData(){
-      await axios.delete("/checkin-api/data", {
-        headers: { token: this.$store.state.token }
-      });
-      this.load()
+    async deleteData() {
+      this.$confirm("此操作将删除所有签到记录, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(async () => {
+          await axios.delete("/checkin-api/data", {
+            headers: { token: this.$store.state.token }
+          });
+          this.load();
+          this.$message({
+            type: "success",
+            message: "删除成功!"
+          });
+        })
     }
   },
   async created() {
