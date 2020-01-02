@@ -3,11 +3,13 @@
     <h1>签到结果</h1>
     <el-button @click="exportXLSX">导出</el-button>
     <el-button type="danger" @click="deleteData">清除数据</el-button>
-    <el-table :data="list" style="margin-top:30px;margin=left:20px;margin-right:20px;">
-      <el-table-column prop="name" label="姓名" width="80"></el-table-column>
-      <el-table-column prop="cardnum" label="一卡通号" width="100"></el-table-column>
-      <el-table-column prop="timedisp" label="签到时间" width="120"></el-table-column>
-    </el-table>
+    <div class="table-container">
+      <el-table :data="list" style="margin-top:30px;">
+        <el-table-column prop="name" label="姓名" width="80"></el-table-column>
+        <el-table-column prop="cardnum" label="一卡通号" width="100"></el-table-column>
+        <el-table-column prop="timedisp" label="签到时间" width="220"></el-table-column>
+      </el-table>
+    </div>
   </div>
 </template>
 
@@ -61,17 +63,16 @@ export default {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning"
-      })
-        .then(async () => {
-          await axios.delete("/checkin-api/data", {
-            headers: { token: this.$store.state.token }
-          });
-          this.load();
-          this.$message({
-            type: "success",
-            message: "删除成功!"
-          });
-        })
+      }).then(async () => {
+        await axios.delete("/checkin-api/data", {
+          headers: { token: this.$store.state.token }
+        });
+        this.load();
+        this.$message({
+          type: "success",
+          message: "删除成功!"
+        });
+      });
     }
   },
   async created() {
@@ -112,5 +113,11 @@ export default {
   flex-basis: 4em;
   text-align: right;
   margin-right: 8px;
+}
+.table-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 </style>
