@@ -6,7 +6,7 @@
     <el-table :data="list" style="margin-top:30px;margin=left:20px;margin-right:20px;">
       <el-table-column prop="name" label="姓名" width="80"></el-table-column>
       <el-table-column prop="cardnum" label="一卡通号" width="100"></el-table-column>
-      <el-table-column prop="timedisp" label="签到时间"></el-table-column>
+      <el-table-column prop="timedisp" label="签到时间" width="120"></el-table-column>
     </el-table>
   </div>
 </template>
